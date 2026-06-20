@@ -1,0 +1,683 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Orbitron:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  --background: #020309;
+  --surface: rgba(7, 10, 24, 0.78);
+  --surface-strong: rgba(4, 6, 16, 0.88);
+  --text: #f7f8ff;
+  --muted: #969db3;
+  --blue: #2587ff;
+  --violet: #744cff;
+  --purple: #ad43ff;
+  --border: rgba(126, 144, 255, 0.28);
+  --card-radius: 42px;
+  --button-radius: 16px;
+  --shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(32, 61, 152, 0.18), transparent 34%),
+    var(--background);
+  color: var(--text);
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.space {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 16% 32%, rgba(59, 32, 153, 0.13), transparent 22%),
+    radial-gradient(circle at 86% 58%, rgba(31, 76, 191, 0.13), transparent 24%),
+    linear-gradient(180deg, #020309, #040612 50%, #020309);
+  pointer-events: none;
+}
+
+.stars {
+  position: absolute;
+  inset: -50%;
+  background-repeat: repeat;
+  transform: rotate(10deg);
+}
+
+.stars-small {
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.75) 0 1px, transparent 1.2px),
+    radial-gradient(circle, rgba(78,127,255,.75) 0 1px, transparent 1.2px),
+    radial-gradient(circle, rgba(157,95,255,.7) 0 1px, transparent 1.2px);
+  background-position: 0 0, 41px 83px, 117px 29px;
+  background-size: 137px 151px, 173px 197px, 211px 181px;
+  opacity: 0.38;
+  animation: star-drift 80s linear infinite;
+}
+
+.stars-medium {
+  background-image:
+    radial-gradient(circle, #6da7ff 0 1.4px, transparent 1.8px),
+    radial-gradient(circle, #9a62ff 0 1.2px, transparent 1.7px);
+  background-position: 28px 62px, 119px 143px;
+  background-size: 281px 293px, 317px 337px;
+  opacity: 0.5;
+  animation: star-drift 115s linear infinite reverse;
+}
+
+@keyframes star-drift {
+  to { transform: rotate(10deg) translate3d(90px, 60px, 0); }
+}
+
+.nebula {
+  position: absolute;
+  width: 640px;
+  height: 640px;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.12;
+}
+
+.nebula-left {
+  top: 26%;
+  left: -420px;
+  background: #4820ff;
+}
+
+.nebula-right {
+  right: -390px;
+  bottom: 4%;
+  background: #6128ff;
+}
+
+.planet {
+  position: absolute;
+  border: 1px solid rgba(93, 94, 255, 0.22);
+  border-radius: 50%;
+  background:
+    linear-gradient(145deg, rgba(40, 92, 255, 0.22), rgba(16, 17, 51, 0.65) 55%, rgba(66, 15, 147, 0.35)),
+    #07091a;
+  box-shadow:
+    inset -18px -20px 38px rgba(0, 0, 0, 0.75),
+    inset 13px 8px 22px rgba(74, 119, 255, 0.18),
+    0 0 42px rgba(71, 72, 255, 0.13);
+}
+
+.planet::after {
+  position: absolute;
+  inset: 14%;
+  border-top: 1px solid rgba(124, 104, 255, 0.18);
+  border-radius: 50%;
+  content: "";
+  transform: rotate(-24deg);
+}
+
+.planet-left {
+  top: 8%;
+  left: 4%;
+  width: 92px;
+  height: 92px;
+}
+
+.planet-right {
+  top: 21%;
+  right: 4%;
+  width: 118px;
+  height: 118px;
+}
+
+.orbit {
+  position: absolute;
+  width: 760px;
+  height: 230px;
+  border: 1px solid rgba(80, 69, 255, 0.25);
+  border-radius: 50%;
+  transform: rotate(-25deg);
+}
+
+.orbit-one {
+  top: 26%;
+  right: -320px;
+}
+
+.orbit-two {
+  bottom: 13%;
+  left: -420px;
+  width: 900px;
+  border-color: rgba(38, 113, 255, 0.2);
+  transform: rotate(-36deg);
+}
+
+.orbit-light {
+  position: absolute;
+  right: -300px;
+  bottom: -330px;
+  width: 610px;
+  height: 610px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #3328a6, #080724 45%, #02030a 70%);
+  box-shadow: 0 0 90px rgba(70, 49, 255, 0.25);
+}
+
+.page-shell {
+  display: grid;
+  min-height: 100vh;
+  padding: 56px 20px;
+  place-items: center;
+}
+
+.orbit-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  width: min(100%, 680px);
+  padding: 68px 54px 38px;
+  border: 1px solid transparent;
+  border-radius: var(--card-radius);
+  background:
+    linear-gradient(var(--surface-strong), var(--surface-strong)) padding-box,
+    linear-gradient(135deg, #2e9cff, rgba(139, 86, 255, 0.75) 25%, rgba(119, 131, 199, 0.45) 55%, #9d3cff) border-box;
+  box-shadow:
+    var(--shadow),
+    inset 0 0 70px rgba(62, 55, 255, 0.035);
+  backdrop-filter: blur(24px);
+  animation: card-enter 0.9s cubic-bezier(.2,.75,.2,1) both;
+}
+
+.orbit-card::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background:
+    linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+  background-size: 32px 32px;
+  content: "";
+  mask-image: linear-gradient(to bottom, black, transparent 42%);
+}
+
+.orbit-card::after {
+  position: absolute;
+  z-index: -1;
+  right: -180px;
+  bottom: -230px;
+  width: 470px;
+  height: 470px;
+  border-radius: 50%;
+  background: rgba(92, 32, 255, 0.12);
+  filter: blur(80px);
+  content: "";
+}
+
+.card-shine {
+  position: absolute;
+  top: -230px;
+  left: -180px;
+  width: 430px;
+  height: 430px;
+  border-radius: 50%;
+  background: rgba(29, 103, 255, 0.12);
+  filter: blur(75px);
+  pointer-events: none;
+}
+
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+}
+
+.brand-symbol {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 26px;
+  filter: drop-shadow(0 0 18px rgba(49, 121, 255, 0.36));
+}
+
+.brand-symbol span:first-child {
+  position: absolute;
+  top: 5px;
+  left: 18px;
+  width: 18px;
+  height: 55px;
+  border-radius: 5px 5px 2px 5px;
+  background: linear-gradient(180deg, #36b8ff, #235dff 55%, #6035ef);
+  clip-path: polygon(50% 0, 100% 16%, 100% 78%, 50% 100%, 0 84%, 0 15%);
+}
+
+.brand-symbol span:last-child {
+  position: absolute;
+  right: 5px;
+  bottom: 8px;
+  width: 43px;
+  height: 18px;
+  border-radius: 2px 4px 5px 5px;
+  background: linear-gradient(90deg, #3159ff, #7e37ff);
+  clip-path: polygon(0 0, 26% 0, 26% 62%, 100% 62%, 80% 100%, 0 100%);
+}
+
+.hero h1 {
+  background: linear-gradient(90deg, #f8f9ff 10%, #f8f9ff 37%, #2587ff 50%, #8647ff 83%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: "Orbitron", "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 7.3vw, 3.25rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
+}
+
+.subtitle {
+  margin-top: 13px;
+  color: #b7bdd0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.86rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+}
+
+.signal-line {
+  position: relative;
+  width: 170px;
+  height: 1px;
+  margin: 35px auto 31px;
+  background: linear-gradient(90deg, transparent, rgba(68, 105, 255, 0.55), transparent);
+}
+
+.signal-line span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #f8f7ff;
+  box-shadow: 0 0 5px #fff, 0 0 13px #3e68ff, 0 0 24px #7144ff;
+  transform: translate(-50%, -50%);
+  animation: signal 2.6s ease-in-out infinite;
+}
+
+@keyframes signal {
+  50% { box-shadow: 0 0 7px #fff, 0 0 20px #3e68ff, 0 0 38px #7144ff; }
+}
+
+.intro {
+  color: #c3c7d5;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1.02rem;
+}
+
+.intro p:last-child {
+  color: #aeb4c6;
+}
+
+.links-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.orbit-link {
+  --link-color: var(--blue);
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  min-height: 88px;
+  padding: 15px 22px;
+  border: 1px solid color-mix(in srgb, var(--link-color) 68%, transparent);
+  border-radius: var(--button-radius);
+  grid-template-columns: 52px minmax(0, 1fr) 36px;
+  gap: 18px;
+  align-items: center;
+  background:
+    linear-gradient(100deg, color-mix(in srgb, var(--link-color) 6%, transparent), transparent 45%),
+    rgba(5, 8, 19, 0.73);
+  box-shadow:
+    inset 0 0 26px rgba(255, 255, 255, 0.012),
+    0 8px 28px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  transform: translateY(15px);
+  animation: link-enter 0.55s cubic-bezier(.2,.75,.2,1) forwards;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, background .25s ease;
+}
+
+.orbit-link::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -45%;
+  width: 30%;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--link-color) 12%, transparent), transparent);
+  content: "";
+  transform: skewX(-20deg);
+  transition: left .5s ease;
+}
+
+.orbit-link:hover {
+  border-color: var(--link-color);
+  background:
+    linear-gradient(100deg, color-mix(in srgb, var(--link-color) 12%, transparent), transparent 55%),
+    rgba(7, 11, 26, 0.93);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--link-color) 12%, transparent),
+    0 12px 35px color-mix(in srgb, var(--link-color) 12%, transparent);
+  transform: translateY(-3px);
+}
+
+.orbit-link:hover::before {
+  left: 115%;
+}
+
+.orbit-link:focus-visible,
+.social-link:focus-visible {
+  outline: 2px solid var(--link-color, var(--blue));
+  outline-offset: 4px;
+}
+
+@keyframes link-enter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.link-icon {
+  display: grid;
+  width: 47px;
+  height: 47px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--link-color) 13%, transparent);
+  place-items: center;
+  color: var(--link-color);
+  font-size: 1.52rem;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--link-color) 35%, transparent));
+}
+
+.link-copy {
+  min-width: 0;
+}
+
+.link-title,
+.link-description {
+  display: block;
+}
+
+.link-title {
+  color: #f4f5fb;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.095em;
+  text-transform: uppercase;
+}
+
+.link-description {
+  overflow: hidden;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-arrow {
+  color: var(--link-color);
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 1;
+  text-align: right;
+  transition: transform .25s ease;
+}
+
+.orbit-link:hover .link-arrow {
+  transform: translateX(5px);
+}
+
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 36px;
+  justify-content: center;
+}
+
+.social-link {
+  --link-color: var(--violet);
+  display: grid;
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(119, 126, 198, 0.2);
+  border-radius: 50%;
+  background: rgba(8, 11, 25, 0.75);
+  place-items: center;
+  color: var(--link-color);
+  font-size: 1.18rem;
+  box-shadow: inset 0 0 14px color-mix(in srgb, var(--link-color) 6%, transparent);
+  opacity: 0;
+  transform: scale(.8);
+  animation: social-enter .42s ease forwards;
+  transition: color .25s ease, border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+
+.social-link:hover {
+  border-color: var(--link-color);
+  box-shadow: 0 0 20px color-mix(in srgb, var(--link-color) 22%, transparent);
+  transform: translateY(-4px);
+}
+
+@keyframes social-enter {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.card-footer {
+  margin-top: 34px;
+  text-align: center;
+}
+
+.footer-phrase {
+  background: linear-gradient(90deg, #238cff, #8453ff, #a344ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.86rem;
+  letter-spacing: 0.31em;
+}
+
+.signal-line-footer {
+  margin: 24px auto 22px;
+}
+
+.copyright {
+  color: #747b91;
+  font-size: 0.68rem;
+}
+
+.toast {
+  position: fixed;
+  z-index: 10;
+  bottom: 24px;
+  left: 50%;
+  padding: 11px 17px;
+  border: 1px solid rgba(92, 127, 255, 0.38);
+  border-radius: 99px;
+  background: rgba(8, 12, 27, 0.92);
+  box-shadow: 0 12px 38px rgba(0, 0, 0, 0.45);
+  color: #d8dcf0;
+  font-size: 0.76rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 16px);
+  transition: opacity .25s ease, transform .25s ease;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 760px) {
+  .page-shell {
+    padding: 28px 14px;
+  }
+
+  .orbit-card {
+    padding: 54px 30px 32px;
+    border-radius: 32px;
+  }
+
+  .planet-left {
+    left: -35px;
+  }
+
+  .planet-right {
+    right: -42px;
+  }
+}
+
+@media (max-width: 520px) {
+  .page-shell {
+    padding: 12px 10px;
+  }
+
+  .orbit-card {
+    padding: 42px 16px 28px;
+    border-radius: 26px;
+  }
+
+  .brand-symbol {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+    transform: scale(.88);
+  }
+
+  .hero h1 {
+    font-size: clamp(1.65rem, 9vw, 2.25rem);
+    letter-spacing: .08em;
+  }
+
+  .subtitle {
+    font-size: .68rem;
+    letter-spacing: .27em;
+  }
+
+  .intro {
+    font-size: .92rem;
+  }
+
+  .signal-line {
+    margin: 28px auto 25px;
+  }
+
+  .links-list {
+    gap: 10px;
+    margin-top: 29px;
+  }
+
+  .orbit-link {
+    min-height: 80px;
+    padding: 13px 14px;
+    border-radius: 14px;
+    grid-template-columns: 42px minmax(0, 1fr) 24px;
+    gap: 12px;
+  }
+
+  .link-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    font-size: 1.25rem;
+  }
+
+  .link-title {
+    font-size: .79rem;
+    letter-spacing: .07em;
+  }
+
+  .link-description {
+    font-size: .67rem;
+  }
+
+  .link-arrow {
+    font-size: 1.55rem;
+  }
+
+  .social-links {
+    gap: 12px;
+    margin-top: 30px;
+  }
+
+  .social-link {
+    width: 44px;
+    height: 44px;
+  }
+
+  .footer-phrase {
+    font-size: .7rem;
+    letter-spacing: .22em;
+  }
+
+  .copyright {
+    font-size: .6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .orbit-link {
+    border-color: rgba(85, 105, 255, .55);
+  }
+
+  .link-icon {
+    background: rgba(61, 82, 190, .15);
+  }
+}
