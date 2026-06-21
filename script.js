@@ -51,7 +51,7 @@ const PROJECT_CONFIG = {
     {
       title: "Lism Technologies",
       description: "Inovação que conecta",
-      url: "#",
+      url: "https://lism-technologies.vercel.app/",
       icon: "⌞",
       color: "#3477ff"
     },
